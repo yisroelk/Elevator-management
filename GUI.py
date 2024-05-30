@@ -1,6 +1,7 @@
-import pygame
 from config import *
 import Building_class
+from floor_class import *
+from elevator_class import *
 
 
 pygame.init()
@@ -9,9 +10,13 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 b = Building_class.Building()
 x = 700
 y = 700
+for i in range (10):
+    nu = i
+numb = str(nu)
+
 dis = pygame.display.set_mode((x, y))
 font = pygame.font.Font('arial.ttf', 12)
-text = font.render('10', True, (255, 0, 0), None)
+text = font.render(numb, True, (255, 0, 0), None)
 text_react = text.get_rect()
 text_react.center = (x//2, y//2)
 
@@ -31,16 +36,6 @@ while run:
     
 
 
-    key = pygame.key.get_pressed()
-    if key[pygame.K_a] == True:
-        player.move_ip(-1, 0)
-    elif key[pygame.K_d] == True:
-        player.move_ip(1, 0)
-    elif key[pygame.K_w] == True:
-        player.move_ip(0, -1)
-    elif key[pygame.K_s] == True:
-        player.move_ip(0, 1)
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
@@ -48,12 +43,21 @@ while run:
         if event.type == pygame.MOUSEBUTTONDOWN:
             x,y = pygame.mouse.get_pos()
             floor_clicked = b.conversion_button(x, y)
+            b.order_elevator(floor_clicked)
             # print(floor_cliced)
-
-
 
 
     pygame.display.update()
 
 pygame.quit()
 
+
+# key = pygame.key.get_pressed()
+#     if key[pygame.K_a] == True:
+#         player.move_ip(-1, 0)
+#     elif key[pygame.K_d] == True:
+#         player.move_ip(1, 0)
+#     elif key[pygame.K_w] == True:
+#         player.move_ip(0, -1)
+#     elif key[pygame.K_s] == True:
+#         player.move_ip(0, 1)

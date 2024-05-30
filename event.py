@@ -1,4 +1,5 @@
 import pygame
+import time
 
 pygame.init()
 
@@ -30,8 +31,13 @@ while run:
         if event.type == pygame.QUIT:
             run = False
 
+    
+    
     pygame.display.update()
-
+    
 pygame.quit()
 
+
+
+print(time.time())
 
