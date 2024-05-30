@@ -6,7 +6,7 @@ from elevator_class import *
 
 pygame.init()
 
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT),vsync=1)
 b = Building_class.Building()
 x = 700
 y = 700
@@ -15,14 +15,16 @@ for i in range (10):
 numb = str(nu)
 
 dis = pygame.display.set_mode((x, y))
-font = pygame.font.Font('arial.ttf', 12)
+font = pygame.font.Font('arial.ttf', 12)  
 text = font.render(numb, True, (255, 0, 0), None)
 text_react = text.get_rect()
 text_react.center = (x//2, y//2)
 
+clock = pygame.time.Clock()
+
 run = True
 while run:
-
+    
     screen.fill((255, 255, 255))
     # x=0
     # for i in range(0, number_floors+1):
@@ -31,6 +33,7 @@ while run:
     #     building = pygame.Rect((0, x, 50, 50))
 
     #pygame.draw.rect(screen, (255, 0, 0), building)
+    b.update()
     b.draw_building(screen)
     dis.blit(text, text_react)
     
@@ -42,11 +45,10 @@ while run:
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             x,y = pygame.mouse.get_pos()
-            floor_clicked = b.conversion_button(x, y)
-            b.order_elevator(floor_clicked)
+            b.order_elevator(x,y)
             # print(floor_cliced)
 
-
+    clock.tick(60)
     pygame.display.update()
 
 pygame.quit()
