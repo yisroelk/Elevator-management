@@ -9,6 +9,7 @@ class floor:
     def __init__(self, i):
         self.timer = 0              # "return to here"
         self.num_floor = i
+        
         # background
         
 
@@ -25,13 +26,14 @@ class floor:
         pygame.draw.rect(screen, (0, 255, 0), butoon)
 
     
-    def drew_number(self, screen):
-        y = (self.num_floor*FLOOR_HEIGHT) # ""FIX THE POSITION!!""
+    def drew_number(self, dis):
+        y = (self.num_floor*FLOOR_HEIGHT + (FLOOR_HEIGHT//2) + 7)
         number = str(self.num_floor)
         font = pygame.font.Font('arial.ttf', 12)
         text = font.render(number, True, (0, 0, 255), None)
         text_react = text.get_rect()
         text_react.center = (BUILDING_POSITION_WIDTH + FLOOR_WIDTH//2, y)
+        dis.blit(text, text_react)
 
         
     def elevator_arrive(self, time):

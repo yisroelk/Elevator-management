@@ -50,7 +50,6 @@ class elevator:
     
     def update(self):
         z = self.current_time.get_elapsed_time()
-        # print(z)
         self.time_past = 3*FLOOR_HEIGHT/0.5 * z
 
 
