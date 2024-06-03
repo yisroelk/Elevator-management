@@ -70,6 +70,8 @@ class floor:
             self.floor_available = True
         return self.floor_available
 
+    def play_sound(self):
+        pygame.mixer.Sound('ding.mp3').play()
 
 
 
