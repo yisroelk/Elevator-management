@@ -31,7 +31,10 @@ class elevator:
         self.num_elv = i
 
     def manager(self, floor, availabil_time):
-        self.array_order.append(floor)
+
+        self.array_order.append(floor) 
+        print(floor, self.current_floor, self.prevous_floor)
+        print(self.array_order)
         self.sum_availability_time = availabil_time + TIME_STOP_FLOOR
         self.availability_time = availabil_time
         self.availability_floor = floor

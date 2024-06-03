@@ -16,10 +16,7 @@ class Building:
         distance_between_elevators = BUILDING_POSITION_WIDTH+FLOOR_WIDTH+3 - FLOOR_HEIGHT # קבלת רוחב המעלית באמצעות גובה הקומה (המעלית מרובעת)
         for floor in self.floors:
             floor.draw_building(screen)
-            # floor.draw_floor(screen)
-            # floor.draw_button(screen)
-            # floor.drew_number(self.dis)
-            # floor.timer_draw(self.dis)
+
         for elevator in self.elevators:
             elevator.draw_elevator(screen, distance_between_elevators + FLOOR_HEIGHT)
             distance_between_elevators += FLOOR_HEIGHT
@@ -31,8 +28,13 @@ class Building:
             return ((math.ceil(y/FLOOR_HEIGHT)) - 1)
         
 
-    def order_elevator(self, x, y): 
+    def order_elevator(self, x, y):
         order_floor = self.button_pressed(x, y)
+        if order_floor is None:
+            return
+        a = self.floors[order_floor].update_floor_availability()
+        if a is False:
+            return
         #if order_floor == int:  # הייתי חייב להכניס לתנאי אחרת בלחיצה במקום שאינה מוגדרת ככפתור זה היה גורם לשגיאה וקריסה
         best_time = float('inf')
         object_elevator = None

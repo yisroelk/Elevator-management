@@ -11,6 +11,7 @@ class floor:
         self.timer = Timer(0)   
         self.timer_color = Timer(0)          
         self.num_floor = i
+        self.floor_available = True
         self.dis = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     
         
@@ -62,6 +63,13 @@ class floor:
         self.drew_number(self.dis)
         self.draw_timer(self.dis)
     
+    def update_floor_availability(self):
+        if self.timer_color.time_remaining() > 0:
+            self.floor_available = False
+        else:
+            self.floor_available = True
+        return self.floor_available
+
 
 
 
