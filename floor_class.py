@@ -18,23 +18,17 @@ class floor:
 
     def draw_floor(self, screen):
         y = (SCREEN_HEIGHT - (self.num_floor+1)*FLOOR_HEIGHT)
-        # floor = pygame.Rect((BUILDING_POSITION_WIDTH, y, FLOOR_WIDTH, FLOOR_HEIGHT))
-        image = pygame.image.load("brick.jpg").convert()
-        # pygame.draw.rect(screen, (0, 187, 255), floor)
+        image = pygame.image.load("bricks.jpg").convert()
         screen.blit(image, (BUILDING_POSITION_WIDTH, y), (0,0, FLOOR_WIDTH, FLOOR_HEIGHT))
         pygame.draw.line(screen,(0, 0, 0),(BUILDING_POSITION_WIDTH, y+3),(BUILDING_POSITION_WIDTH + FLOOR_WIDTH-1 ,y+3),7)
 
 
     def draw_button(self, screen):
         y = ( SCREEN_HEIGHT - (self.num_floor+1)*FLOOR_HEIGHT + ((FLOOR_HEIGHT+BUTTOM_SPACE)/2))
-        #y = (SCREEN_HEIGHT - (self.num_floor+1)*FLOOR_HEIGHT)
-        butoon = pygame.Rect((BUILDING_POSITION_WIDTH + FLOOR_WIDTH//2 - (BUTTON_WIDTH//2) , y+9, BUTTON_WIDTH, BUTTON_HEIGHT))
         if self.timer_color.time_remaining() > 0:
             pygame.draw.circle(screen, BUTTON_PRESSED_COLOR, ((BUILDING_POSITION_WIDTH + FLOOR_WIDTH//2), y), 10)
-            #pygame.draw.rect(screen, BUTTON_PRESSED_COLOR, butoon)
         else:
             pygame.draw.circle(screen, BUTTON_COLOR, ((BUILDING_POSITION_WIDTH + FLOOR_WIDTH//2), y), 10)
-            #pygame.draw.rect(screen, BUTTON_COLOR, butoon)
 
     
     def drew_number(self, dis):
