@@ -19,7 +19,7 @@ class floor:
     def draw_floor(self, screen):
         y = (self.num_floor*FLOOR_HEIGHT) # ""FIX THE POSITION!!""
         # floor = pygame.Rect((BUILDING_POSITION_WIDTH, y, FLOOR_WIDTH, FLOOR_HEIGHT))
-        image = pygame.image.load("brek.jpg").convert()
+        image = pygame.image.load("brick.jpg").convert()
         # pygame.draw.rect(screen, (0, 187, 255), floor)
         screen.blit(image, (BUILDING_POSITION_WIDTH, y), (0,0, FLOOR_WIDTH, FLOOR_HEIGHT))
         pygame.draw.line(screen,(0, 0, 0),(BUILDING_POSITION_WIDTH, y+3),(BUILDING_POSITION_WIDTH + FLOOR_WIDTH-1 ,y+3),7)

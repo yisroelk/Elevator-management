@@ -1,19 +1,20 @@
 from config import *
 from floor_class import *
 from elevator_class import *
-# from GUI import *
 
 
 class Building:
 
     def __init__(self):
-        self.floors = [floor(i) for i in range(NUMBER_FLOORS)]
-        self.elevators = [elevator(i) for i in range(NUMBER_ELEVATORS)]
+        # Creating an array containing elevator objects according to the number of elevators in the config file.
+        self.floors = [floor(i) for i in range(NUMBER_FLOORS)] 
+        # Creating an array containing elevator objects according to the number of elevators in the config file.
+        self.elevators = [elevator(i) for i in range(NUMBER_ELEVATORS)] 
         self.dis = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 
     def draw_building(self, screen):
-        distance_between_elevators = BUILDING_POSITION_WIDTH+FLOOR_WIDTH+3 - FLOOR_HEIGHT # קבלת רוחב המעלית באמצעות גובה הקומה (המעלית מרובעת)
+        distance_between_elevators = BUILDING_POSITION_WIDTH+FLOOR_WIDTH+3 - FLOOR_HEIGHT
         for floor in self.floors:
             floor.draw_building(screen)
 
@@ -45,23 +46,9 @@ class Building:
                 object_elevator = e
         object_elevator.manager(order_floor, best_time)
         self.floors[order_floor].elevator_arrive(best_time)
-        # else:
-        #     return
+
 
     def update(self):
         for elevator in self.elevators:
             elevator.update()
         
-
-
-
-
-
-        best_time = 0
-        pass
-
-
-
-
-
-
