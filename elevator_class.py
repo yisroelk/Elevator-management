@@ -18,7 +18,7 @@ class elevator:
         self.time_past = 0
         self.time_waiting = 0
         self.current_time = 0
-        self.display_current_floor = self.current_floor * FLOOR_HEIGHT
+        self.display_current_floor = (1+self.current_floor) * FLOOR_HEIGHT
         self.num_elv = i
         self.tt = StopWatch()
 
@@ -55,13 +55,13 @@ class elevator:
         if self.travel != 0:
             t = self.current_time.get_elapsed_time()
             if self.current_floor > self.prevous_floor:
-                self.pixels_travel = FLOOR_HEIGHT/TIME_PASS_FLOOR * t
-            else:
                 self.pixels_travel = -FLOOR_HEIGHT/TIME_PASS_FLOOR * t
+            else:
+                self.pixels_travel = FLOOR_HEIGHT/TIME_PASS_FLOOR * t
             if t >= self.travel:
                 self.travel = 0
                 self.pixels_travel = 0
-                self.display_current_floor = self.current_floor * FLOOR_HEIGHT
+                self.display_current_floor = (1+self.current_floor) * FLOOR_HEIGHT
                 pygame.mixer.Sound('ding.mp3').play()
                 self.tt = StopWatch()
         if self.travel == 0:
@@ -71,4 +71,4 @@ class elevator:
 
     # Draws the elevator, based on variables that are constantly updated with the updated location
     def draw_elevator(self, screen, x,):
-        screen.blit(self.img, (x, self.display_current_floor + self.pixels_travel))
+        screen.blit(self.img, (x, SCREEN_HEIGHT - self.display_current_floor + self.pixels_travel))

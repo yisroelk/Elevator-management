@@ -26,7 +26,7 @@ class Building:
 
     def button_pressed(self, x, y):
         if BUILDING_POSITION_WIDTH + FLOOR_WIDTH//2 - (BUTTON_WIDTH//2) < x < BUILDING_POSITION_WIDTH + FLOOR_WIDTH//2 - (BUTTON_WIDTH//2) + BUTTON_WIDTH:
-            return ((math.ceil(y/FLOOR_HEIGHT)) - 1)
+            return math.ceil((SCREEN_HEIGHT - y)/FLOOR_HEIGHT) - 1
         
 
     def order_elevator(self, x, y):

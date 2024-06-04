@@ -17,15 +17,16 @@ class floor:
         
 
     def draw_floor(self, screen):
-        y = (self.num_floor*FLOOR_HEIGHT) # ""FIX THE POSITION!!""
+        y = (SCREEN_HEIGHT - (self.num_floor+1)*FLOOR_HEIGHT) # ""FIX THE POSITION!!""
         # floor = pygame.Rect((BUILDING_POSITION_WIDTH, y, FLOOR_WIDTH, FLOOR_HEIGHT))
         image = pygame.image.load("brick.jpg").convert()
         # pygame.draw.rect(screen, (0, 187, 255), floor)
         screen.blit(image, (BUILDING_POSITION_WIDTH, y), (0,0, FLOOR_WIDTH, FLOOR_HEIGHT))
         pygame.draw.line(screen,(0, 0, 0),(BUILDING_POSITION_WIDTH, y+3),(BUILDING_POSITION_WIDTH + FLOOR_WIDTH-1 ,y+3),7)
 
+
     def draw_button(self, screen):
-        y = (self.num_floor*FLOOR_HEIGHT) # ""FIX THE POSITION!!""
+        y = (SCREEN_HEIGHT - (self.num_floor+1)*FLOOR_HEIGHT) # ""FIX THE POSITION!!""
         butoon = pygame.Rect((BUILDING_POSITION_WIDTH + FLOOR_WIDTH//2 - (BUTTON_WIDTH//2) , y+9, BUTTON_WIDTH, BUTTON_HEIGHT))
         if self.timer_color.time_remaining() > 0:
             #pygame.draw.circle(screen, BUTTON_PRESSED_COLOR, (BUILDING_POSITION_WIDTH + FLOOR_WIDTH//2 - (BUTTON_WIDTH//2) , y+9), 12)
@@ -35,7 +36,7 @@ class floor:
 
     
     def drew_number(self, dis):
-        y = (self.num_floor*FLOOR_HEIGHT + (FLOOR_HEIGHT//2) + 4)
+        y = ( SCREEN_HEIGHT - (self.num_floor+1)*FLOOR_HEIGHT + (FLOOR_HEIGHT//2) + 4)
         number = str(self.num_floor)
         font = pygame.font.SysFont('arial', FONT_SIZE)
         text = font.render(number, True, (0, 0, 255), None)
@@ -44,7 +45,7 @@ class floor:
         dis.blit(text, text_react)
 
     def draw_timer(self, dis):
-        y = (self.num_floor*FLOOR_HEIGHT + (FLOOR_HEIGHT//2) + 4)
+        y = (SCREEN_HEIGHT - (self.num_floor+1)*FLOOR_HEIGHT + (FLOOR_HEIGHT//2) + 4)
         time_remaining = self.timer.time_remaining()
         if time_remaining > 0:
             a = f'{time_remaining:.2f}'
@@ -64,6 +65,7 @@ class floor:
         self.draw_button(screen)
         self.drew_number(self.dis)
         self.draw_timer(self.dis)
+
     
     def update_floor_availability(self):
         if self.timer_color.time_remaining() > 0:
@@ -71,6 +73,7 @@ class floor:
         else:
             self.floor_available = True
         return self.floor_available
+    
 
     def play_sound(self):
         pygame.mixer.Sound('ding.mp3').play()
