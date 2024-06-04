@@ -16,6 +16,7 @@ rect = IMAGE.get_rect()
 rect.bottomleft = (0, 700)
 
 
+
 run = True
 while run:
     
@@ -28,6 +29,7 @@ while run:
     Building.update()
     #Calls the build function in the building class which causes all elements to be drawn.
     Building.draw_building(screen)
+
 
     #A loop that follows events triggered by the user.
     for event in pygame.event.get():
