@@ -35,14 +35,11 @@ class Building:
         a = self.floors[order_floor].update_floor_availability()
         if a is False:
             return
-        #if order_floor == int:  # הייתי חייב להכניס לתנאי אחרת בלחיצה במקום שאינה מוגדרת ככפתור זה היה גורם לשגיאה וקריסה
         best_time = float('inf')
         object_elevator = None
         for e in self.elevators:
             time, floor = e.availability()
             travel = abs(floor - order_floor) * TIME_PASS_FLOOR + time
-            #print(e.num_elv, floor, travel, time)
-
             if travel < best_time:
                 best_time = travel
                 object_elevator = e

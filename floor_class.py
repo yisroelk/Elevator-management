@@ -18,24 +18,26 @@ class floor:
 
     def draw_floor(self, screen):
         y = (self.num_floor*FLOOR_HEIGHT) # ""FIX THE POSITION!!""
-        floor = pygame.Rect((BUILDING_POSITION_WIDTH, y, FLOOR_WIDTH, FLOOR_HEIGHT))
-        pygame.draw.rect(screen, (0, 187, 255), floor)
+        # floor = pygame.Rect((BUILDING_POSITION_WIDTH, y, FLOOR_WIDTH, FLOOR_HEIGHT))
+        image = pygame.image.load("brek.jpg").convert()
+        # pygame.draw.rect(screen, (0, 187, 255), floor)
+        screen.blit(image, (BUILDING_POSITION_WIDTH, y), (0,0, FLOOR_WIDTH, FLOOR_HEIGHT))
         pygame.draw.line(screen,(0, 0, 0),(BUILDING_POSITION_WIDTH, y+3),(BUILDING_POSITION_WIDTH + FLOOR_WIDTH-1 ,y+3),7)
-
 
     def draw_button(self, screen):
         y = (self.num_floor*FLOOR_HEIGHT) # ""FIX THE POSITION!!""
         butoon = pygame.Rect((BUILDING_POSITION_WIDTH + FLOOR_WIDTH//2 - (BUTTON_WIDTH//2) , y+9, BUTTON_WIDTH, BUTTON_HEIGHT))
         if self.timer_color.time_remaining() > 0:
-            pygame.draw.rect(screen, (255, 0, 0), butoon)
+            #pygame.draw.circle(screen, BUTTON_PRESSED_COLOR, (BUILDING_POSITION_WIDTH + FLOOR_WIDTH//2 - (BUTTON_WIDTH//2) , y+9), 12)
+            pygame.draw.rect(screen, BUTTON_PRESSED_COLOR, butoon)
         else:
-            pygame.draw.rect(screen, (0, 255, 0), butoon)
+            pygame.draw.rect(screen, BUTTON_COLOR, butoon)
 
     
     def drew_number(self, dis):
         y = (self.num_floor*FLOOR_HEIGHT + (FLOOR_HEIGHT//2) + 4)
         number = str(self.num_floor)
-        font = pygame.font.Font('arial.ttf', 12)
+        font = pygame.font.SysFont('arial', FONT_SIZE)
         text = font.render(number, True, (0, 0, 255), None)
         text_react = text.get_rect()
         text_react.center = (BUILDING_POSITION_WIDTH + FLOOR_WIDTH//2, y)
@@ -46,8 +48,8 @@ class floor:
         time_remaining = self.timer.time_remaining()
         if time_remaining > 0:
             a = f'{time_remaining:.2f}'
-            font = pygame.font.Font('arial.ttf', 12)
-            text = font.render(a, True, (0, 0, 255), None)
+            font = pygame.font.Font('arial.ttf', FONT_SIZE)
+            text = font.render(a, True, (0, 0, 255), (255, 255, 255))
             text_react = text.get_rect()
             text_react.center = (BUILDING_POSITION_WIDTH + FLOOR_WIDTH//4, y)
             dis.blit(text, text_react)
