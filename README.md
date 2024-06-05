@@ -14,21 +14,21 @@ pip install pygame
 ## Class Responsibility
 In total there are 5 classes: Building, Elevator, Floor, Timer and StopWatch.
 
-Elevator responsibilities:
+### Elevator responsibilities:
 When a new call is received, add it correctly to the queue
 Update the position of the elevator 
 Draw the elevator on the screen
 Managing the queue 
 Activate the ding and enter rest mode when arriving at a destination
 
-Floor responsibilities:
+### Floor responsibilities:
 Draw the floor on the screen
 
-Timer responsibilities:
+### Timer responsibilities:
 Update the time left on the timer 
 Draw the timer on the screen
 
-Building responsibilities:
+### Building responsibilities:
 Initiate all the other objects 
 Check for new calls from buttons
 When a new call is identified, calculate the best elevator and send the new call to it, and start the timer on the floor
@@ -36,7 +36,7 @@ Update all the objects in the pygame loop
 Draw all the objects in the pygame loop
 
 
-Walkthrough of the program
+## Walkthrough of the program
 When running the main.py file, we create an object of Building, who then creates all the other objects in their starting positions.
 
 When a button is pressed the building will find the best elevator to send to that floor, then we run the new_call() function on that elevator, which takes care of the rest.
