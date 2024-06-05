@@ -2,8 +2,9 @@
 
 Elevator management is a Python program for managing elevators.
 
-## Installation
+## dependencies
 
+This program uses the pygame library/
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install pygame.
 
 ```bash
