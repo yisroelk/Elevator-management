@@ -1,7 +1,4 @@
-from config import *
-import Building_class
-from floor_class import *
-from elevator_class import *
+from Building_class import *
 
 
 pygame.init()
@@ -9,7 +6,7 @@ pygame.init()
 # Creating a surface on which to draw
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT),vsync = 1)
 # Creating an object of Building class.
-Building = Building_class.Building()
+building = Building()
 # Creating an image to display in the background.
 background_img = pygame.image.load(BACKGROUND_IMG).convert()
 rect = background_img.get_rect()
@@ -25,9 +22,9 @@ while run:
     screen.blit(background_img, rect)
 
     # Calls an update function in the building class that causes the positions of all elements to be updated.
-    Building.update()
+    building.update()
     #Calls the build function in the building class which causes all elements to be drawn.
-    Building.draw_building(screen)
+    building.draw_building(screen)
 
 
     #A loop that follows events triggered by the user.
@@ -38,7 +35,7 @@ while run:
         #Get an event of clicking the left mouse button and returns the coordinates of the place of the click.
         if event.type == pygame.MOUSEBUTTONDOWN:
             x, y = pygame.mouse.get_pos()
-            Building.order_elevator(x, y)
+            building.order_elevator(x, y)
 
     pygame.display.update()
 
