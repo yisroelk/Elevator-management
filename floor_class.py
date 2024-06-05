@@ -1,11 +1,8 @@
 from config import *
-# from Building_class import *
-# from elevator_class import *
-# from GUI import *
 from timer_class import *
 
 
-class floor:
+class Floor:
 
     def __init__(self, i):
         self.timer = Timer(0)   
@@ -13,42 +10,43 @@ class floor:
         self.num_floor = i
         self.floor_available = True
         self.dis = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    
         
 
     def draw_floor(self, screen):
-        y = (SCREEN_HEIGHT - (self.num_floor+1)*FLOOR_HEIGHT)
-        image = pygame.image.load("bricks.jpg").convert()
-        screen.blit(image, (BUILDING_POSITION_WIDTH, y), (0,0, FLOOR_WIDTH, FLOOR_HEIGHT))
-        pygame.draw.line(screen,(0, 0, 0),(BUILDING_POSITION_WIDTH, y+3),(BUILDING_POSITION_WIDTH + FLOOR_WIDTH-1 ,y+3),7)
+        y = (SCREEN_HEIGHT - (self.num_floor + 1) * FLOOR_HEIGHT)
+        image = pygame.image.load(FLOOR_IMG).convert()
+        screen.blit(image, (BUILDING_SIDE_MARGIN, y), (0, 0, FLOOR_WIDTH, FLOOR_HEIGHT))
+        pygame.draw.line(screen, LINE_COLOR, (BUILDING_SIDE_MARGIN, y + MID_LINE), \
+                         (BUILDING_SIDE_MARGIN + FLOOR_WIDTH - 1, y + MID_LINE), LINE_WIDTH)
 
 
     def draw_button(self, screen):
-        y = ( SCREEN_HEIGHT - (self.num_floor+1)*FLOOR_HEIGHT + ((FLOOR_HEIGHT+BUTTOM_SPACE)/2))
+        y = (SCREEN_HEIGHT - (self.num_floor + 1) * FLOOR_HEIGHT + ((FLOOR_HEIGHT + BUTTOM_SPACE) / 2))
         if self.timer_color.time_remaining() > 0:
-            pygame.draw.circle(screen, BUTTON_PRESSED_COLOR, ((BUILDING_POSITION_WIDTH + FLOOR_WIDTH//2), y), 10)
+            pygame.draw.circle(screen, BUTTON_PRESSED_COLOR, ((BUILDING_SIDE_MARGIN + FLOOR_WIDTH // 2), y), CIRCLE_RADIUS)
         else:
-            pygame.draw.circle(screen, BUTTON_COLOR, ((BUILDING_POSITION_WIDTH + FLOOR_WIDTH//2), y), 10)
+            pygame.draw.circle(screen, BUTTON_COLOR, ((BUILDING_SIDE_MARGIN + FLOOR_WIDTH // 2), y), CIRCLE_RADIUS)
 
     
     def drew_number(self, dis):
-        y = ( SCREEN_HEIGHT - (self.num_floor+1)*FLOOR_HEIGHT + ((FLOOR_HEIGHT+BUTTOM_SPACE)/2))
+        y = (SCREEN_HEIGHT - (self.num_floor + 1) * FLOOR_HEIGHT + ((FLOOR_HEIGHT+BUTTOM_SPACE) / 2))
         number = str(self.num_floor)
-        font = pygame.font.SysFont('arial', FONT_SIZE)
-        text = font.render(number, True, (0, 0, 255), None)
+        font = pygame.font.Font(FONT, FONT_SIZE)
+        text = font.render(number, True, FONT_COLOR, None)
         text_react = text.get_rect()
-        text_react.center = (BUILDING_POSITION_WIDTH + FLOOR_WIDTH//2, y)
+        text_react.center = (BUILDING_SIDE_MARGIN + FLOOR_WIDTH // 2, y)
         dis.blit(text, text_react)
 
+
     def draw_timer(self, dis):
-        y = (SCREEN_HEIGHT - (self.num_floor+1)*FLOOR_HEIGHT + ((FLOOR_HEIGHT+BUTTOM_SPACE)/2))
+        y = (SCREEN_HEIGHT - (self.num_floor + 1) * FLOOR_HEIGHT + ((FLOOR_HEIGHT + BUTTOM_SPACE) / 2))
         time_remaining = self.timer.time_remaining()
         if time_remaining > 0:
             timer_str = f'{time_remaining:.2f}'
-            font = pygame.font.Font('arial.ttf', FONT_SIZE)
-            text = font.render(timer_str, True, (0, 0, 255), (255, 255, 255))
+            font = pygame.font.Font(FONT, FONT_SIZE)
+            text = font.render(timer_str, True, FONT_COLOR, TIMER_BACKGROUND)
             text_react = text.get_rect()
-            text_react.bottomleft = (BUILDING_POSITION_WIDTH + 4, y + FONT_SIZE/2)
+            text_react.bottomleft = (BUILDING_SIDE_MARGIN + TIMER_MARGIN, y + FONT_SIZE / 2)
             dis.blit(text, text_react)
 
         
@@ -72,9 +70,4 @@ class floor:
     
 
     def play_sound(self):
-        pygame.mixer.Sound('ding.mp3').play()
-
-
-
-
-
+        pygame.mixer.Sound(ELEVATOR_ARRIVAL_SOUND).play()

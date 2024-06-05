@@ -7,27 +7,25 @@ class Building:
 
     def __init__(self):
         # Creating an array containing elevator objects according to the number of elevators in the config file.
-        self.floors = [floor(i) for i in range(NUMBER_FLOORS)] 
+        self.floors = [Floor(i) for i in range(NUMBER_FLOORS)]
         # Creating an array containing elevator objects according to the number of elevators in the config file.
-        self.elevators = [elevator(i) for i in range(NUMBER_ELEVATORS)] 
+        self.elevators = [Elevator(i) for i in range(NUMBER_ELEVATORS)]
         self.dis = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-
     def draw_building(self, screen):
-        distance_between_elevators = BUILDING_POSITION_WIDTH+FLOOR_WIDTH+3 - FLOOR_HEIGHT
+        distance_between_elevators = BUILDING_SIDE_MARGIN + FLOOR_WIDTH + 3 - FLOOR_HEIGHT
         for floor in self.floors:
             floor.draw_building(screen)
 
         for elevator in self.elevators:
-            elevator.draw_elevator(screen, distance_between_elevators + FLOOR_HEIGHT)
+            elevator.draw_elevator(
+                screen, distance_between_elevators + FLOOR_HEIGHT)
             distance_between_elevators += FLOOR_HEIGHT
 
-        
-
     def button_pressed(self, x, y):
-        if BUILDING_POSITION_WIDTH + FLOOR_WIDTH//2 - (BUTTON_WIDTH//2) < x < BUILDING_POSITION_WIDTH + FLOOR_WIDTH//2 - (BUTTON_WIDTH//2) + BUTTON_WIDTH:
-            return math.ceil((SCREEN_HEIGHT - y)/FLOOR_HEIGHT) - 1
-        
+        if BUILDING_SIDE_MARGIN + FLOOR_WIDTH // 2 - (BUTTON_WIDTH//2) < x \
+                < BUILDING_SIDE_MARGIN + FLOOR_WIDTH // 2 - (BUTTON_WIDTH // 2) + BUTTON_WIDTH:
+            return math.ceil((SCREEN_HEIGHT - y) / FLOOR_HEIGHT) - 1
 
     def order_elevator(self, x, y):
         order_floor = self.button_pressed(x, y)
@@ -47,8 +45,6 @@ class Building:
         object_elevator.manager(order_floor, best_time)
         self.floors[order_floor].elevator_arrive(best_time)
 
-
     def update(self):
         for elevator in self.elevators:
             elevator.update()
-        

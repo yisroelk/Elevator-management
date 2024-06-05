@@ -7,14 +7,13 @@ from elevator_class import *
 pygame.init()
 
 # Creating a surface on which to draw
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT),vsync=1)
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT),vsync = 1)
 # Creating an object of Building class.
 Building = Building_class.Building()
 # Creating an image to display in the background.
-IMAGE = pygame.image.load('sky.jpg').convert()
-rect = IMAGE.get_rect()
-rect.bottomleft = (0, 700)
-
+background_img = pygame.image.load(BACKGROUND_IMG).convert()
+rect = background_img.get_rect()
+rect.bottomleft = (0, SCREEN_HEIGHT)
 
 
 run = True
@@ -23,7 +22,7 @@ while run:
     # Cleaning the surface by filling it with white.
     screen.fill((255, 255, 255))
     #Drawing the background image.
-    screen.blit(IMAGE, rect)
+    screen.blit(background_img, rect)
 
     # Calls an update function in the building class that causes the positions of all elements to be updated.
     Building.update()
@@ -38,8 +37,8 @@ while run:
             run = False
         #Get an event of clicking the left mouse button and returns the coordinates of the place of the click.
         if event.type == pygame.MOUSEBUTTONDOWN:
-            x,y = pygame.mouse.get_pos()
-            Building.order_elevator(x,y)
+            x, y = pygame.mouse.get_pos()
+            Building.order_elevator(x, y)
 
     pygame.display.update()
 
