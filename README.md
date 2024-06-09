@@ -1,44 +1,76 @@
 # Elevator management
 
 Elevator management is a Python program for managing elevators.
+This project simulates the behavior of elevators in a building using Pygame.
 
-## dependencies
+## Overview
 
-This program uses the pygame library/
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install pygame.
+The simulation consists of three main classes:
 
-```bash
-pip install pygame
+1. `Building`: Represents the building containing floors and elevators.
+2. `Floor`: Represents a floor in the building with buttons and timers.
+3. `Elevator`: Represents an elevator with functionality for movement and scheduling.
+
+## Classes
+
+### 1. Building Class
+
+The `Building` class initializes and manages the building structure. It contains methods for updating and drawing the building on the screen.
+
+### 2. Floor Class
+
+The `Floor` class represents a floor in the building. It handles the buttons for calling elevators and timers for indicating elevator arrival times. The class is responsible for user interaction and updating the floor status.
+
+### 3. Elevator Class
+
+The `Elevator` class represents an elevator. It manages its movement, scheduling, and availability. This class updates the elevator position and status based on user input and simulation logic.
+
+## Features
+
+- Multiple elevators with configurable parameters such as speed and capacity.
+- Simulation of elevator movement and arrival times.
+- User interaction to call elevators and select destinations.
+
+## Structure
+
+The project has the following structure:
+
+- `config.py`: Configuration file containing parameters such as elevator speed, floor height, and button colors.
+- `main.py`: Main script to run the simulation.
+- `Building_class.py`: Class definition for the Building.
+- `floor_class.py`: Class definition for the Floor.
+- `elevator_class.py`: Class definition for the Elevator.
+- `stopwatch_class.py`: Class definition for a stopwatch used for timing.
+- `timer_class.py`: Class definition for a timer used for scheduling.
+
+## Installation and Usage
+
+### Prerequisites
+
+- Python 3.x
+- Pygame library
+
+### Installation
+
+1. Clone the repository:
+
+```
+git clone https://github.com/yourusername/elevator-simulation.git
+```
+2. Install Pygame:
+```
+python main.py
 ```
 
+### Usage
+1. Run the main script:
+```
+python main.py
+```
+2. Click on a floor button to call an elevator.
 
-## Class Responsibility
-In total there are 5 classes: Building, Elevator, Floor, Timer and StopWatch.
-
-### Building:
-Initiate all the other objects 
-Check for new calls from buttons
-When a new call is identified, calculate the best elevator and send the new call to it, and start the timer on the floor
-Update all the objects in the pygame loop 
-Draw all the objects in the pygame loop
-
-### Elevator:
-When a new call is received, add it correctly to the queue
-Update the position of the elevator 
-Draw the elevator on the screen
-Managing the queue 
-Activate the ding and enter rest mode when arriving at a destination
-
-### Floor:
-Draw the floor on the screen
-
-### Timer:
-Update the time left on the timer 
-Draw the timer on the screen
-
-### StopWatch:
-Update the time left on the timer 
-Draw the timer on the screen
+### Configuration
+The behavior of the elevators can be configured using the `config.py fil`'. Parameters such as elevator speed, floor height, and button colors can be adjusted to customize the simulation.
 
 ## Walkthrough of the program
 When running the main.py file, we create an object of Building, who then creates all the other objects in their starting positions.
