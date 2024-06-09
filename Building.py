@@ -1,6 +1,6 @@
 from config import *
-from floor_class import *
-from elevator_class import *
+from Floor import *
+from Elevator import *
 
 
 class Building:
@@ -19,9 +19,10 @@ class Building:
 
         Creates floors and elevators according to the configuration settings.
         """
-        self.floors = [Floor(i) for i in range(NUMBER_FLOORS)]  # Create list of Floor objects
-        self.elevators = [Elevator(i) for i in range(NUMBER_ELEVATORS)]  # Create list of Elevator objects
-        self.dis = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))  # Initialize display surface
+        self.floors = [Floor(i) for i in range(NUMBER_FLOORS)]
+        self.elevators = [Elevator(i) for i in range(NUMBER_ELEVATORS)]
+        self.dis = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+        
 
     def draw_building(self, screen):
         """
@@ -34,7 +35,6 @@ class Building:
         # Draw each floor
         for floor in self.floors:
             floor.draw_building(screen)
-
         # Draw each elevator
         for elevator in self.elevators:
             elevator.draw_elevator(screen, distance_between_elevators + FLOOR_HEIGHT)
@@ -56,11 +56,11 @@ class Building:
             if order_floor is not None:
                 break
         if order_floor is None:
-            return  # If no valid floor button was pressed, exit the method
+            return
         # Check if the floor is available for an elevator to pick up
         availabil = self.floors[order_floor].update_floor_availability()
         if availabil is False:
-            return  # If the floor is not available, exit the method
+            return
         # Find the best elevator to respond to the order
         best_time = float('inf')
         object_elevator = None
@@ -84,8 +84,7 @@ class Building:
         This method updates each elevator in the building by calling their respective
         update methods to handle their position and status.
         """
-        # Iterate through each elevator in the building
+        # Iterate through each elevator in the building and update
         for elevator in self.elevators:
-            # Update the elevator's position and status
             elevator.update()
 

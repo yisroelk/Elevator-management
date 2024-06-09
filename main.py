@@ -1,4 +1,4 @@
-from Building_class import *
+from Building import *
 
 
 pygame.init()
@@ -11,6 +11,12 @@ building = Building()
 background_img = pygame.image.load(BACKGROUND_IMG).convert()
 rect = background_img.get_rect()
 rect.bottomleft = (0, SCREEN_HEIGHT)
+# Set the current window caption.
+pygame.display.set_caption("Elevator-management v1.0.0")
+# Change the system image for the display window.
+img = pygame.image.load(ELEVATOR_IMG)
+pygame.display.set_icon(img)
+
 
 
 run = True
@@ -20,6 +26,7 @@ while run:
     screen.fill((255, 255, 255))
     #Drawing the background image.
     screen.blit(background_img, rect)
+
 
     # Calls an update function in the building class that causes the positions of all elements to be updated.
     building.update()
@@ -36,6 +43,7 @@ while run:
         if event.type == pygame.MOUSEBUTTONDOWN:
             x, y = pygame.mouse.get_pos()
             building.order_elevator(x, y)
+            
 
     pygame.display.update()
 

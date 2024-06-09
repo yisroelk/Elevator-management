@@ -1,5 +1,5 @@
 from config import *
-from timer_class import *
+from Timer import *
 
 class Floor:
     def __init__(self, floor_num):
@@ -19,9 +19,11 @@ class Floor:
         self.timer_closing = Timer(0)  # Timer for door closing time
         self.num_floor = floor_num  # Floor number
         self.floor_available = True  # Flag indicating if the floor is available
-        self.butoon = None
+        self.butoon = None # Represents the button object
+        # Variables containing the x and y coordinates of the button
         self.y_button = SCREEN_HEIGHT - (self.num_floor + 1) * FLOOR_HEIGHT + (FLOOR_HEIGHT + BUTTOM_SPACE) / 2
-        self.x_button = BUILDING_SIDE_MARGIN + FLOOR_WIDTH // 2
+        self.x_button = BUILDING_SIDE_MARGIN + FLOOR_WIDTH / 2
+
 
     def draw_floor(self, screen):
         """
@@ -30,11 +32,9 @@ class Floor:
         Args:
             screen (pygame.Surface): Pygame display surface.
         """
-        # Calculate the y-coordinate of the floor
+        # Calculate the y-coordinate of the floor and Blit the floor image onto the screen
         y = (SCREEN_HEIGHT - (self.num_floor + 1) * FLOOR_HEIGHT)
-        # Load the floor image
         image = pygame.image.load(FLOOR_IMG).convert()
-        # Blit the floor image onto the screen
         screen.blit(image, (BUILDING_SIDE_MARGIN, y), (0, 0, FLOOR_WIDTH, FLOOR_HEIGHT))
         # Draw a line to represent the separation between floors
         pygame.draw.line(screen, LINE_COLOR, (BUILDING_SIDE_MARGIN, y + MID_LINE),
@@ -50,14 +50,24 @@ class Floor:
         """
         y = self.y_button
         x = self.x_button
-        self.butoon = pygame.Rect(x - (BUTTON_WIDTH//2), y - (BUTTON_WIDTH//2), BUTTON_WIDTH, BUTTON_HEIGHT - 5)
+        self.butoon = pygame.Rect(x - (BUTTON_WIDTH/2), y - (BUTTON_WIDTH/2), BUTTON_WIDTH, BUTTON_HEIGHT)
         if self.timer_closing.time_remaining() > 0:
-            pygame.draw.rect(screen, (255, 0, 0), self.butoon, 0, 10)
+            pygame.draw.rect(screen, (255, 0, 0), self.butoon, 0, BORDER_RADIUS)
         else:
-            pygame.draw.rect(screen, (0, 255, 0), self.butoon, 0, 10)
+            pygame.draw.rect(screen, (0, 255, 0), self.butoon, 0, BORDER_RADIUS)
 
 
     def button_pressed(self, x, y):
+        """
+        Checks if the button on this floor has been pressed.
+
+        Args:
+        - x (int): x-coordinate of the place of the click.
+        - y (int): y-coordinate of the place of the click.
+
+        Returns:
+        - int or None: Floor number if the button was pressed, None otherwise.
+        """
         if self.butoon.collidepoint(x, y):
             return self.num_floor
 
@@ -69,18 +79,14 @@ class Floor:
         Args:
             dis (pygame.Surface): Pygame display surface.
         """
-        # Convert the floor number to a string
+        # Display the floor number text with the font, color, and background color
         number = str(self.num_floor)
-        # Create a font object with the specified font and size
         font = pygame.font.Font(FONT, FONT_SIZE)
-        # Render the floor number text with the font, color, and background color
         text = font.render(number, True, FONT_COLOR, None)
-        # Get the rectangle bounding the text
         text_react = text.get_rect()
-        # Center the text on the floor
         text_react.center = (self.x_button, self.y_button)
-        # Blit the text onto the display surface
         screen.blit(text, text_react)
+
 
     def draw_timer(self, dis):
         """
@@ -89,21 +95,16 @@ class Floor:
         Args:
             dis: Pygame display.
         """
-        # Get the remaining time from the timer
+        # Display the timer text with the font, color, and background color
         time_remaining = self.timer.time_remaining()
         if time_remaining > 0:
-            # Format the time string with two decimal places
             timer_str = f'{time_remaining:.2f}'
-            # Create a font object with the specified font and size
             font = pygame.font.Font(FONT, FONT_SIZE)
-            # Render the timer text with the font, color, and background color
             text = font.render(timer_str, True, FONT_COLOR, TIMER_BACKGROUND)
-            # Get the rectangle bounding the text
             text_react = text.get_rect()
-            # Position the bottom left corner of the text rectangle
             text_react.bottomleft = (BUILDING_SIDE_MARGIN + TIMER_MARGIN, self.y_button + FONT_SIZE / 2)
-            # Blit the text onto the display
             dis.blit(text, text_react)
+
 
     def elevator_arrive(self, time):
         """
@@ -127,6 +128,7 @@ class Floor:
         self.drew_number(screen)
         self.draw_timer(screen)
 
+
     def update_floor_availability(self):
         """
         Updates the availability of the floor for an elevator pickup.
@@ -135,10 +137,11 @@ class Floor:
         - bool: True if the floor is available, False otherwise.
         """
         if self.timer_closing.time_remaining() > 0:
-            self.floor_available = False  # Set floor availability to False if timer is running
+            self.floor_available = False
         else:
-            self.floor_available = True  # Set floor availability to True if timer is not running
-        return self.floor_available  # Return floor availability status
+            self.floor_available = True
+        return self.floor_available
+
 
     def play_sound(self):
         """Plays the elevator arrival sound."""

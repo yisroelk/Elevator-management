@@ -1,6 +1,6 @@
 from config import *
-from stopwatch_class import *
-from timer_class import *
+from Stopwatch import *
+from Timer import *
 
 
 class Elevator:
@@ -62,7 +62,6 @@ class Elevator:
         """
         return self.sum_availability_time, self.availability_floor
 
-    
 
     def update(self):
         """
