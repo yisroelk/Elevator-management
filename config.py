@@ -4,7 +4,7 @@ import math
 
 # User input
 NUMBER_FLOORS = 20
-NUMBER_ELEVATORS = 1
+NUMBER_ELEVATORS = 2
 
 # Window size.
 SCREEN_WIDTH =  1200

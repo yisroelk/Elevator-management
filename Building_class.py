@@ -41,30 +41,6 @@ class Building:
             distance_between_elevators += FLOOR_HEIGHT
 
 
-    def button_pressed(self, x, y):
-        """
-        Determines the floor number based on the button pressed.
-
-        Args:
-        - x (int): x-coordinate of the place of the click.
-        - y (int): y-coordinate of the place of the click.
-
-        Returns:
-        - int or None: Floor number if a valid button is pressed, None otherwise.
-        """
-        # Calculate the x-coordinate range for the button
-        left_x = BUILDING_SIDE_MARGIN + FLOOR_WIDTH // 2 - (BUTTON_WIDTH // 2)
-        right_x = left_x + BUTTON_WIDTH
-        # Check if the button press falls within the x-coordinate range
-        if left_x < x < right_x:
-            # Calculate the floor number based on the button press
-            floor_number = math.ceil((SCREEN_HEIGHT - y) / FLOOR_HEIGHT) - 1
-            return floor_number  # Return the floor number
-        else:
-            return None  # Return None if the press is outside the valid range of a button
-
-
-
     def order_elevator(self, x, y):
         """
         orders an elevator based on the floor number the button was pressed on.
@@ -74,7 +50,11 @@ class Building:
         - y (int): y-coordinate of the button pressed.
         """
         # Determine the floor number based on the button pressed
-        order_floor = self.button_pressed(x, y)
+        order_floor = None
+        for floor in self.floors:
+            order_floor = floor.button_pressed(x, y)
+            if order_floor is not None:
+                break
         if order_floor is None:
             return  # If no valid floor button was pressed, exit the method
         # Check if the floor is available for an elevator to pick up

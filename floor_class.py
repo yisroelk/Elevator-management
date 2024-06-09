@@ -19,6 +19,7 @@ class Floor:
         self.timer_closing = Timer(0)  # Timer for door closing time
         self.num_floor = floor_num  # Floor number
         self.floor_available = True  # Flag indicating if the floor is available
+        self.butoon = None
         self.y_button = SCREEN_HEIGHT - (self.num_floor + 1) * FLOOR_HEIGHT + (FLOOR_HEIGHT + BUTTOM_SPACE) / 2
         self.x_button = BUILDING_SIDE_MARGIN + FLOOR_WIDTH // 2
 
@@ -49,12 +50,16 @@ class Floor:
         """
         y = self.y_button
         x = self.x_button
+        self.butoon = pygame.Rect(x - (BUTTON_WIDTH//2), y - (BUTTON_WIDTH//2), BUTTON_WIDTH, BUTTON_HEIGHT - 5)
         if self.timer_closing.time_remaining() > 0:
-            # Draw the button with a pressed color if the timer for closing the door is active
-            pygame.draw.circle(screen, BUTTON_PRESSED_COLOR, (x, y), CIRCLE_RADIUS)
+            pygame.draw.rect(screen, (255, 0, 0), self.butoon, 0, 10)
         else:
-            # Draw the button with a default color if the timer for closing the door is not active
-            pygame.draw.circle(screen, BUTTON_COLOR, (x, y), CIRCLE_RADIUS)
+            pygame.draw.rect(screen, (0, 255, 0), self.butoon, 0, 10)
+
+
+    def button_pressed(self, x, y):
+        if self.butoon.collidepoint(x, y):
+            return self.num_floor
 
 
     def drew_number(self, screen):
