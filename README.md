@@ -79,10 +79,3 @@ When a button is pressed the building will find the best elevator to send to tha
 
 In each iteration of the pygame loop we update all the objects, and then put them on the screen.
 
-
-
-
-
-
-![elv](https://github.com/yisroelk/Elevator-management/assets/96789748/95bc76aa-3f77-497a-8ec5-786394694998)
-
