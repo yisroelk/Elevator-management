@@ -83,3 +83,6 @@ In each iteration of the pygame loop we update all the objects, and then put the
 
 
 
+
+![elv](https://github.com/yisroelk/Elevator-management/assets/96789748/95bc76aa-3f77-497a-8ec5-786394694998)
+
