@@ -4,18 +4,23 @@ import math
 
 # User input
 NUMBER_FLOORS = 20
-NUMBER_ELEVATORS = 2
+NUMBER_ELEVATORS = 1
 
-# Window size.
+# Window size
 SCREEN_WIDTH =  1200
 SCREEN_HEIGHT = 800
+FILL_COLOR = (255,255,255)  # RGB
+
+# World_size 
+WORLD_WIDTH = SCREEN_WIDTH
+WORLD_HEIGHT = NUMBER_FLOORS * 50
 
 # Margin between the building and the edge of the window.
 BUILDING_SIDE_MARGIN = SCREEN_WIDTH / 100 * 4 # 4 percent of the width of the window
 BUILDING_TOP_MARGIN = 50    # in pixels
 
 # Floor variables.
-FLOOR_HEIGHT = (SCREEN_HEIGHT - BUILDING_TOP_MARGIN) // NUMBER_FLOORS
+FLOOR_HEIGHT = 50 # (SCREEN_HEIGHT - BUILDING_TOP_MARGIN) // NUMBER_FLOORS
 FLOOR_WIDTH = 100   # in pixels
 TIME_PASS_FLOOR = 0.5   # in seconds
 TIME_STOP_FLOOR = 2 # in seconds
@@ -39,6 +44,11 @@ BORDER_RADIUS = 13
 # Elevator variables.
 ELEVATOR_H = FLOOR_HEIGHT - BUTTOM_SPACE
 ELEVATOR_W = ELEVATOR_H
+
+
+SCROLL_X = 0
+SCROLL_Y = WORLD_HEIGHT - SCREEN_HEIGHT
+SCROLL_SPEED = 10   # Pixels per key press
 
 # File variables.
 FONT = "assets/arial.ttf"

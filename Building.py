@@ -21,10 +21,10 @@ class Building:
         """
         self.floors = [Floor(i) for i in range(NUMBER_FLOORS)]
         self.elevators = [Elevator(i) for i in range(NUMBER_ELEVATORS)]
-        self.dis = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+        #self.dis = pygame.display.set_mode((SCREEN_WIDTH, FLOOR_HEIGHT * NUMBER_FLOORS))
         
 
-    def draw_building(self, screen):
+    def draw_building(self, world):
         """
         Draws the building on the given screen.
 
@@ -34,10 +34,10 @@ class Building:
         distance_between_elevators = BUILDING_SIDE_MARGIN + FLOOR_WIDTH - FLOOR_HEIGHT
         # Draw each floor
         for floor in self.floors:
-            floor.draw_building(screen)
+            floor.draw_building(world)
         # Draw each elevator
         for elevator in self.elevators:
-            elevator.draw_elevator(screen, distance_between_elevators + FLOOR_HEIGHT)
+            elevator.draw_elevator(world, distance_between_elevators + FLOOR_HEIGHT)
             distance_between_elevators += FLOOR_HEIGHT
 
 

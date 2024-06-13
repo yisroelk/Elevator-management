@@ -81,7 +81,7 @@ class Elevator:
             self.current_floor = self.array_order.pop(0)  # Move to the next floor in the order list
             self.current_time = StopWatch()  # Start tracking time for this floor
             self.travel = abs(self.current_floor - self.previous_floor) * TIME_PASS_FLOOR  # Calculate travel time
-            self.time_waiting = TIME_STOP_FLOOR  # Set waiting time at the floor
+            self.time_waiting = TIME_STOP_FLOOR # Set waiting time at the floor
 
         # If the elevator is currently in transit between floors
         if self.travel != 0:
@@ -107,7 +107,7 @@ class Elevator:
                 self.time_waiting = 0
 
 
-    def draw_elevator(self, screen, x):
+    def draw_elevator(self, world, x):
         """
         Draws the elevator on the screen.
 
@@ -119,7 +119,7 @@ class Elevator:
         It takes into account the current floor level and any vertical travel (pixels_travel) the elevator has made.
         """
         # Calculate the y-coordinate based on the elevator's current position and vertical travel
-        y = SCREEN_HEIGHT - self.display_current_floor + self.pixels_travel
+        y = WORLD_HEIGHT - self.display_current_floor + self.pixels_travel
         # Draw the elevator image onto the screen at the specified coordinates
-        screen.blit(self.img, (x, y))
+        world.blit(self.img, (x, y))
 
